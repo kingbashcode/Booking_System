@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -133,11 +135,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void showOrderListEntries () {
-        //OrderAdapter orderAdapter = new OrderAdapter(this, R.layout.adapter_view_layout, orderList);
-        ArrayAdapter<Order> orderArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_selectable_list_item, orderList);
-        final ListView orderListView = (ListView) findViewById(R.id.listview_bestellung);
-        orderList.get(i).getitems();
-        orderListView.setAdapter(orderArrayAdapter);
+        ExpandableListView expListView = (ExpandableListView) findViewById(R.id.exlistview_bestellung);
+        List listDataHeader = new ArrayList<String>();
+        listDataHeader.add("Order " + i + 1);
+        ExpandableListAdapter listAdapter = new OrderAdapter(this, listDataHeader, orderList.get(i).getitems());
+        expListView.setAdapter(listAdapter);
     }
 
     private void filldatabase() {

@@ -13,7 +13,7 @@ public class Order {
     double Preis;
     Map<Food, Long> resultMapfood = new HashMap<>();
     Map<Drinks, Long> resultMapdrink = new HashMap<>();
-    Map items = new HashMap<>();
+    HashMap items = new HashMap<>();
 
 
 
@@ -90,7 +90,7 @@ public class Order {
 
     }
 
-    public Map getitems(){
+    public HashMap getitems(){
 
         items.putAll(resultMapdrink);
         items.putAll(resultMapfood);
@@ -98,5 +98,6 @@ public class Order {
         return items;
 
     };
+
 
 }

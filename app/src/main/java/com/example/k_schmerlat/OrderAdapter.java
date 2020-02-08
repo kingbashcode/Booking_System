@@ -1,12 +1,14 @@
 package com.example.k_schmerlat;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.BaseExpandableListAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,46 +19,101 @@ import androidx.annotation.RequiresApi;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static android.R.layout.simple_list_item_1;
 
-public class OrderAdapter extends ArrayAdapter<Order> {
+public class OrderAdapter extends BaseExpandableListAdapter {
     private static final String TAG ="ADAPTER";
 
     private Context mcontext;
-    int mRessource;
+    private List<String> orderHeader;
+    private HashMap<String, List<String>> listDataChild;
 
 
-    public OrderAdapter(Context context, int resource, List<Order> objects) {
-        super(context, resource, objects);
-        mcontext = context;
-        mRessource = resource;
+
+    public OrderAdapter(Context context, List<String> orderHeader, HashMap<String, List<String>> listDataChild) {
+        this.mcontext = context;
+        this.orderHeader = orderHeader;
+        this.listDataChild = listDataChild;
     }
 
-    @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        double preis = getItem(position).getPreis();
-        List<Food> foodList = getItem(position).getFoodList();
-        List<Drinks> drinksList = getItem(position).getDrinkList();
+    public Object getChild(int groupPosition, int childPosition) {
+        return this.listDataChild.get(this.orderHeader.get(groupPosition)).get(childPosition);
+    }
 
-        LayoutInflater inflater = LayoutInflater.from(mcontext);
-       convertView = inflater.inflate(mRessource, parent, false);
+    @Override
+    public long getChildId(int groupPosition, int childPosition) {
+        return childPosition;
+    }
 
-        TextView lvpreis = convertView.findViewById(R.id.editView_preis1);
-        ArrayAdapter<Drinks> lvdrinkaddapter = new ArrayAdapter<Drinks> (mcontext, simple_list_item_1, drinksList);
-        ArrayAdapter<Food> lvfoodaddapter = new ArrayAdapter<Food> (mcontext, simple_list_item_1, foodList);
+    @Override
+    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+        final String childText = (String) getChild(groupPosition, childPosition);
 
-        ListView lvfood = (ListView) convertView.findViewById(R.id.listview_food1);
-        ListView lvdrink = (ListView) convertView.findViewById(R.id.listview_drinks1);
+        if (convertView == null) {
+            LayoutInflater infalInflater = (LayoutInflater) this.mcontext
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = infalInflater.inflate(R.layout.list_item, null);
+        }
 
-        //lvpreis.setText((int) preis);
-        lvfood.setAdapter(lvfoodaddapter);
-        lvdrink.setAdapter(lvdrinkaddapter);
+        TextView txtListChild = (TextView) convertView
+                .findViewById(R.id.expandedListItem);
+
+        txtListChild.setText(childText);
+        return convertView;
+    }
 
 
-        return super.getView(position, convertView, parent);
+    @Override
+    public int getChildrenCount(int groupPosition) {
+        return this.listDataChild.get(this.orderHeader.get(groupPosition)).size();
+    }
+
+    @Override
+    public Object getGroup(int groupPosition) {
+        return this.orderHeader.get(groupPosition);
+    }
+
+    @Override
+    public int getGroupCount() {
+        return this.orderHeader.size();
+    }
+
+
+    @Override
+    public long getGroupId(int groupPosition) {
+        return groupPosition;
+    }
+
+
+    @Override
+    public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+        String headerTitle = (String) getGroup(groupPosition);
+        if (convertView == null) {
+            LayoutInflater infalInflater = (LayoutInflater) this.mcontext
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = infalInflater.inflate(R.layout.list_group, null);
+        }
+
+        TextView lblListHeader = (TextView) convertView
+                .findViewById(R.id.listTitle);
+        lblListHeader.setTypeface(null, Typeface.BOLD);
+        lblListHeader.setText(headerTitle);
+
+        return convertView;
+    }
+
+    @Override
+    public boolean hasStableIds() {
+        return false;
+    }
+
+    @Override
+    public boolean isChildSelectable(int groupPosition, int childPosition) {
+        return true;
     }
 }

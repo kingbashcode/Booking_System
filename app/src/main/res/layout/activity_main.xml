@@ -115,7 +115,7 @@
 
             <ExpandableListView
 
-                android:id="@+id/listview_bestellung"
+                android:id="@+id/exlistview_bestellung"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
