@@ -42,7 +42,7 @@ public class OrderAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return this.listDataChild.get(this.orderHeader.get(groupPosition)).get(childPosition);
+        return this.listDataChild.get(childPosition);
     }
 
     @Override
@@ -70,7 +70,8 @@ public class OrderAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return this.listDataChild.get(this.orderHeader.get(groupPosition)).size();
+        String header = this.orderHeader.get(groupPosition);
+        return this.listDataChild.size();
     }
 
     @Override

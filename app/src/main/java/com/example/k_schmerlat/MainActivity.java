@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
     private DataSource dataSource;
     private List<Order> orderList = new ArrayList<>();
+    HashMap items;
+    ExpandableListView expListView;
     private int i = 0;
 
 
@@ -135,10 +137,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void showOrderListEntries () {
-        ExpandableListView expListView = (ExpandableListView) findViewById(R.id.exlistview_bestellung);
+        expListView = (ExpandableListView) findViewById(R.id.exlistview_bestellung);
         List listDataHeader = new ArrayList<String>();
-        listDataHeader.add("Order " + i + 1);
-        ExpandableListAdapter listAdapter = new OrderAdapter(this, listDataHeader, orderList.get(i).getitems());
+        listDataHeader.add("Order " + (i + 1));
+        items = orderList.get(i).getitems();
+        ExpandableListAdapter listAdapter = new OrderAdapter(this, listDataHeader, items);
         expListView.setAdapter(listAdapter);
     }
 
