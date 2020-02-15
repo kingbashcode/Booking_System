@@ -20,6 +20,7 @@ import androidx.annotation.RequiresApi;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,11 +31,11 @@ public class OrderAdapter extends BaseExpandableListAdapter {
 
     private Context mcontext;
     private List<String> orderHeader;
-    private HashMap<String, List<String>> listDataChild;
+    private LinkedHashMap<Object, Long> listDataChild;
 
 
 
-    public OrderAdapter(Context context, List<String> orderHeader, HashMap<String, List<String>> listDataChild) {
+    public OrderAdapter(Context context, List<String> orderHeader, LinkedHashMap<Object, Long> listDataChild) {
         this.mcontext = context;
         this.orderHeader = orderHeader;
         this.listDataChild = listDataChild;
@@ -42,7 +43,10 @@ public class OrderAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return this.listDataChild.get(childPosition);
+        List<Object> list = new ArrayList<Object>(listDataChild.keySet());
+        Object child = list.get(childPosition);
+        String txt = child.toString();
+        return txt;
     }
 
     @Override

@@ -19,6 +19,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     HashMap items;
     ExpandableListView expListView;
     private int i = 0;
+    List listDataHeader = new ArrayList<String>();
 
 
 
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         dataSource = new DataSource(this);
         filldatabase();
         activateAddButton();
+        listDataHeader.add("Bestellung " + (i + 1));
 
     }
     protected void onResume() {
@@ -67,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             Order order = new Order();
             orderList.add(order);
+            listDataHeader.add("Bestellung " + (i + 1));
             i++;
         }
     }); }
@@ -138,10 +142,9 @@ public class MainActivity extends AppCompatActivity {
     }
     private void showOrderListEntries () {
         expListView = (ExpandableListView) findViewById(R.id.exlistview_bestellung);
-        List listDataHeader = new ArrayList<String>();
-        listDataHeader.add("Order " + (i + 1));
         items = orderList.get(i).getitems();
-        ExpandableListAdapter listAdapter = new OrderAdapter(this, listDataHeader, items);
+        LinkedHashMap<Object, Long> newMap = new LinkedHashMap<>(items);
+        ExpandableListAdapter listAdapter = new OrderAdapter(this, listDataHeader, newMap);
         expListView.setAdapter(listAdapter);
     }
 
