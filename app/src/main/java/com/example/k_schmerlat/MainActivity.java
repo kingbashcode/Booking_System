@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -20,9 +19,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private List<Order> orderList = new ArrayList<>();
     ExpandableListView expListView;
     private int i = 0;
+    private int m = 0;
     List<String> listDataHeader = new ArrayList<String>();
     List<Double> preis = new ArrayList<Double>();
     private HashMap<String, List<Object>> itemsmap = new HashMap<>();
@@ -161,11 +159,23 @@ public class MainActivity extends AppCompatActivity {
 
         HashMap items = prepareListData();
         List preis = calcPreis();
-        ExpandableListAdapter listAdapter = new OrderAdapter(this, listDataHeader, items, preis);
+        final ExpandableListAdapter listAdapter = new OrderAdapter(this, listDataHeader, items, preis);
         expListView.setAdapter(listAdapter);
         expListView.expandGroup(i);
+        expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                Toast.makeText(MainActivity.this, listDataHeader.get(groupPosition) + " ausgewählt",Toast.LENGTH_SHORT).show();
+                i = groupPosition;
+                m++;
+                return false;
+            }
+        });
+
 
     }
+
+
 
     private HashMap<String, List<Object>> prepareListData () {
         List<Object> items = new ArrayList<Object>();
@@ -176,10 +186,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+
     private List<Double> calcPreis () {
         if (preis.isEmpty()){
             preis.add(orderList.get(i).getPreis());
         }else if (preis.size() == (i + 1)) {
+            preis.set(i,orderList.get(i).getPreis());
+        }else if (m == i && m != 0) {
             preis.set(i,orderList.get(i).getPreis());
         }else{preis.add(orderList.get(i).getPreis());}
 
