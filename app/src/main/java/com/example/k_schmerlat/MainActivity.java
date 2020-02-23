@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     ExpandableListView expListView;
     private int i = 0;
     List<String> listDataHeader = new ArrayList<String>();
+    List<Double> preis = new ArrayList<Double>();
     private HashMap<String, List<Object>> itemsmap = new HashMap<>();
 
 
@@ -157,9 +158,12 @@ public class MainActivity extends AppCompatActivity {
     }
     private void showOrderListEntries () {
         expListView = (ExpandableListView) findViewById(R.id.exlistview_bestellung);
+
         HashMap items = prepareListData();
-        ExpandableListAdapter listAdapter = new OrderAdapter(this, listDataHeader, items);
+        List preis = calcPreis();
+        ExpandableListAdapter listAdapter = new OrderAdapter(this, listDataHeader, items, preis);
         expListView.setAdapter(listAdapter);
+        expListView.expandGroup(i);
 
     }
 
@@ -170,6 +174,16 @@ public class MainActivity extends AppCompatActivity {
         itemsmap.put(listDataHeader.get(i), items);
         return itemsmap;
 
+    }
+
+    private List<Double> calcPreis () {
+        if (preis.isEmpty()){
+            preis.add(orderList.get(i).getPreis());
+        }else if (preis.size() == (i + 1)) {
+            preis.set(i,orderList.get(i).getPreis());
+        }else{preis.add(orderList.get(i).getPreis());}
+
+        return preis;
     }
 
     private void filldatabase() {

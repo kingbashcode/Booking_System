@@ -1,45 +1,30 @@
 package com.example.k_schmerlat;
-
 import android.content.Context;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
-import static android.R.layout.simple_list_item_1;
 
 public class OrderAdapter extends BaseExpandableListAdapter {
     private static final String TAG ="ADAPTER";
 
     private Context mcontext;
     private List<String> orderHeader;
-    //private List<Double> listPreis;
+    private List<Double> listPreis;
     private HashMap<String, List<Object>> listDataChild;
 
 
 
-    public OrderAdapter(Context context, List<String> orderHeader, HashMap<String, List<Object>> listDataChild) {
+    public OrderAdapter(Context context, List<String> orderHeader, HashMap<String, List<Object>> listDataChild, List<Double> listPreis) {
         this.mcontext = context;
         this.orderHeader = orderHeader;
         this.listDataChild = listDataChild;
+        this.listPreis = listPreis;
 
 
     }
@@ -103,6 +88,7 @@ public class OrderAdapter extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         String headerTitle = (String) getGroup(groupPosition);
+        Double preis = listPreis.get(groupPosition);
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this.mcontext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -111,8 +97,10 @@ public class OrderAdapter extends BaseExpandableListAdapter {
 
         TextView lblListHeader = (TextView) convertView
                 .findViewById(R.id.listTitle);
+        TextView ListHpreis = (TextView) convertView.findViewById(R.id.preis_p_order);
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
+        ListHpreis.setText(preis.toString());
 
 
         return convertView;
