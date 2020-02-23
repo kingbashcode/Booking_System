@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -29,10 +30,11 @@ public class MainActivity extends AppCompatActivity {
 
     private DataSource dataSource;
     private List<Order> orderList = new ArrayList<>();
-    HashMap items;
     ExpandableListView expListView;
     private int i = 0;
-    List listDataHeader = new ArrayList<String>();
+    List<String> listDataHeader = new ArrayList<String>();
+    private HashMap<String, List<Object>> itemsmap = new HashMap<>();
+
 
 
 
@@ -43,8 +45,10 @@ public class MainActivity extends AppCompatActivity {
 
         dataSource = new DataSource(this);
         filldatabase();
-        activateAddButton();
-        listDataHeader.add("Bestellung " + (i + 1));
+        listDataHeader.add("Bestellung " + (i));
+
+
+
 
     }
     protected void onResume() {
@@ -55,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
         Log.d(LOG_TAG, "Folgende Einträge sind in der Datenbank vorhanden:");
         showdrinksListEntries();
         showfoodListEntries();
+
+
+
     }
 
     protected void onPause(){
@@ -64,16 +71,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void activateAddButton() {
-      Button buttonAddProduct = (Button) findViewById(R.id.button_new_order);
-      buttonAddProduct.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Order order = new Order();
-            orderList.add(order);
-            listDataHeader.add("Bestellung " + (i + 1));
-            i++;
-        }
-    }); }
+
+        Button buttonAddProduct = (Button) findViewById(R.id.button_new_order);
+        buttonAddProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Order order = new Order();
+                orderList.add(order);
+                i++;
+                listDataHeader.add("Bestellung " + (i));
+                showOrderListEntries ();
+
+
+            }
+
+        }); }
 
     private void showdrinksListEntries () {
         List<Drinks> drinksList = dataSource.getAllDrinks();
@@ -103,7 +115,8 @@ public class MainActivity extends AppCompatActivity {
                     double price = order.getPreis() + value.getPreis();
                     order.setPreis(price);
                 }
-                showOrderListEntries();
+                showOrderListEntries ();
+                activateAddButton();
 
             }
         });
@@ -135,17 +148,28 @@ public class MainActivity extends AppCompatActivity {
                     double price = order.getPreis() + value.getPreis();
                     order.setPreis(price);
                 }
-                showOrderListEntries();
+
+                showOrderListEntries ();
+                activateAddButton();
 
             }
         });
     }
     private void showOrderListEntries () {
         expListView = (ExpandableListView) findViewById(R.id.exlistview_bestellung);
-        items = orderList.get(i).getitems();
-        LinkedHashMap<Object, Long> newMap = new LinkedHashMap<>(items);
-        ExpandableListAdapter listAdapter = new OrderAdapter(this, listDataHeader, newMap);
+        HashMap items = prepareListData();
+        ExpandableListAdapter listAdapter = new OrderAdapter(this, listDataHeader, items);
         expListView.setAdapter(listAdapter);
+
+    }
+
+    private HashMap<String, List<Object>> prepareListData () {
+        List<Object> items = new ArrayList<Object>();
+        items.addAll(orderList.get(i).getFoodList());
+        items.addAll(orderList.get(i).getDrinkList());
+        itemsmap.put(listDataHeader.get(i), items);
+        return itemsmap;
+
     }
 
     private void filldatabase() {
@@ -197,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        }
+    }
 
 
 

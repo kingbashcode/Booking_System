@@ -31,23 +31,25 @@ public class OrderAdapter extends BaseExpandableListAdapter {
 
     private Context mcontext;
     private List<String> orderHeader;
-    private LinkedHashMap<Object, Long> listDataChild;
+    //private List<Double> listPreis;
+    private HashMap<String, List<Object>> listDataChild;
 
 
 
-    public OrderAdapter(Context context, List<String> orderHeader, LinkedHashMap<Object, Long> listDataChild) {
+    public OrderAdapter(Context context, List<String> orderHeader, HashMap<String, List<Object>> listDataChild) {
         this.mcontext = context;
         this.orderHeader = orderHeader;
         this.listDataChild = listDataChild;
+
+
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        List<Object> list = new ArrayList<Object>(listDataChild.keySet());
-        Object child = list.get(childPosition);
-        String txt = child.toString();
-        return txt;
+        Object orderObject = this.listDataChild.get(this.orderHeader.get(groupPosition)).get(childPosition);
+        return orderObject.toString();
     }
+
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
@@ -58,6 +60,7 @@ public class OrderAdapter extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         final String childText = (String) getChild(groupPosition, childPosition);
 
+
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this.mcontext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -67,15 +70,17 @@ public class OrderAdapter extends BaseExpandableListAdapter {
         TextView txtListChild = (TextView) convertView
                 .findViewById(R.id.expandedListItem);
 
+
         txtListChild.setText(childText);
+
         return convertView;
     }
 
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        String header = this.orderHeader.get(groupPosition);
-        return this.listDataChild.size();
+        return this.listDataChild.get(this.orderHeader.get(groupPosition))
+                .size();
     }
 
     @Override
@@ -108,6 +113,7 @@ public class OrderAdapter extends BaseExpandableListAdapter {
                 .findViewById(R.id.listTitle);
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
+
 
         return convertView;
     }
