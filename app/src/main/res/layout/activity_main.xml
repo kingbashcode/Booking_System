@@ -104,7 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#A3E91E63"
+                android:backgroundTint="#B3FF9800"
                 android:text="Neue Bestellung" />
         </LinearLayout>
 
@@ -117,6 +117,7 @@
             <ExpandableListView
 
                 android:id="@+id/exlistview_bestellung"
+                style="@android:style/Widget.ExpandableListView"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:divider="@android:color/darker_gray"

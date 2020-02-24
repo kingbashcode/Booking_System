@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private List<Order> orderList = new ArrayList<>();
     ExpandableListView expListView;
     private int i = 0;
-    private int m = 0;
+    private boolean m = false;
     List<String> listDataHeader = new ArrayList<String>();
     List<Double> preis = new ArrayList<Double>();
     private HashMap<String, List<Object>> itemsmap = new HashMap<>();
@@ -71,13 +71,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void activateAddButton() {
 
-        Button buttonAddProduct = (Button) findViewById(R.id.button_new_order);
+        Button buttonAddProduct = findViewById(R.id.button_new_order);
         buttonAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Order order = new Order();
                 orderList.add(order);
-                i++;
+                i = (orderList.size() -1);
+                //i++;
                 listDataHeader.add("Bestellung " + (i));
                 showOrderListEntries ();
 
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayAdapter<Drinks> drinksArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_selectable_list_item, drinksList);
 
-        final ListView drinksListView = (ListView) findViewById(R.id.listview_drinks);
+        final ListView drinksListView = findViewById(R.id.listview_drinks);
         drinksListView.setAdapter(drinksArrayAdapter);
         drinksListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -126,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayAdapter<Food> foodArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_selectable_list_item, foodList);
 
-        final ListView foodListView = (ListView) findViewById(R.id.listview_food);
+        final ListView foodListView = findViewById(R.id.listview_food);
         foodListView.setAdapter(foodArrayAdapter);
         foodListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -155,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void showOrderListEntries () {
-        expListView = (ExpandableListView) findViewById(R.id.exlistview_bestellung);
+        expListView = findViewById(R.id.exlistview_bestellung);
 
         HashMap items = prepareListData();
         List preis = calcPreis();
@@ -167,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                 Toast.makeText(MainActivity.this, listDataHeader.get(groupPosition) + " ausgewählt",Toast.LENGTH_SHORT).show();
                 i = groupPosition;
-                m++;
+                m = true;
                 return false;
             }
         });
@@ -193,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
             preis.add(orderList.get(i).getPreis());
         }else if (preis.size() == (i + 1)) {
             preis.set(i,orderList.get(i).getPreis());
-        }else if (m == i && m != 0) {
+        }else if (m == true && preis.size() != i) {
             preis.set(i,orderList.get(i).getPreis());
         }else{preis.add(orderList.get(i).getPreis());}
 

@@ -52,7 +52,7 @@ public class OrderAdapter extends BaseExpandableListAdapter {
             convertView = infalInflater.inflate(R.layout.list_item, null);
         }
 
-        TextView txtListChild = (TextView) convertView
+        TextView txtListChild = convertView
                 .findViewById(R.id.expandedListItem);
 
 
@@ -88,16 +88,18 @@ public class OrderAdapter extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         String headerTitle = (String) getGroup(groupPosition);
-        Double preis = listPreis.get(groupPosition);
+        Double preis = 0.0;
+        if (listPreis.size() > groupPosition){
+            preis = listPreis.get(groupPosition);}
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this.mcontext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.list_group, null);
         }
 
-        TextView lblListHeader = (TextView) convertView
+        TextView lblListHeader = convertView
                 .findViewById(R.id.listTitle);
-        TextView ListHpreis = (TextView) convertView.findViewById(R.id.preis_p_order);
+        TextView ListHpreis = convertView.findViewById(R.id.preis_p_order);
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
         ListHpreis.setText(preis.toString());
