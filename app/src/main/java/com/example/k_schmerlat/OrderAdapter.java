@@ -1,5 +1,7 @@
 package com.example.k_schmerlat;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -129,10 +131,28 @@ public class OrderAdapter extends BaseExpandableListAdapter {
         Button button = (Button) convertView.findViewById(R.id.complete);
 
 
+        final Double finalPreis = preis;
         button.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(mcontext, headerTitle + " ausgewählt",Toast.LENGTH_SHORT).show();
+
+                AlertDialog alertDialog = new AlertDialog.Builder(mcontext).create(); //Read Update
+                alertDialog.setTitle("Bezahlen");
+                alertDialog.setMessage("Offener Betrag: " + finalPreis);
+
+                alertDialog.setButton("Abbrechen..", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // here you can add functions
+                    }
+                });
+                alertDialog.setButton("Abschliessen..", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // here you can add functions
+                    }
+                });
+
+                alertDialog.show();  //<-- See This!
             }
+
         });
 
 
