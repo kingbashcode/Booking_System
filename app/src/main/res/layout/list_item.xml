@@ -30,6 +30,13 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        <Button
+            android:id="@+id/delete_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.001"
+            android:text="X"/>
     </LinearLayout>
 </LinearLayout>
 

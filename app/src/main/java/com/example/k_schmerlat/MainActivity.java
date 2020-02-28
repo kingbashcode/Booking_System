@@ -24,6 +24,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
+    private static MainActivity instance;
 
     private DataSource dataSource;
     private List<Order> orderList = new ArrayList<>();
@@ -37,10 +38,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        instance = this;
 
         dataSource = new DataSource(this);
         filldatabase();
@@ -166,12 +169,13 @@ public class MainActivity extends AppCompatActivity {
         expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                Toast.makeText(MainActivity.this, listDataHeader.get(groupPosition) + " ausgewählt",Toast.LENGTH_SHORT).show();
                 i = groupPosition;
                 m = true;
                 return false;
             }
         });
+
+
 
 
     }
@@ -187,7 +191,26 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void deletedItem (Object object) {
+        Order order = orderList.get(i);
+        List<Food> food = order.getFoodList();
+        List<Drinks> drink = order.getDrinkList();
+        if (food.contains(object)){
+            preis.remove(food.get(food.indexOf(object)).getPreis());
+            Double newPreis = order.getPreis() - food.get(food.indexOf(object)).getPreis();
+            order.setPreis(newPreis);
+            order.removeFood(food.indexOf(object));
+            calcPreis();
 
+        }else if (drink.contains(object)){
+            preis.remove(drink.get(drink.indexOf(object)).getPreis());
+            Double newPreis = order.getPreis() - drink.get(drink.indexOf(object)).getPreis();
+            order.setPreis(newPreis);
+            order.removeDrink(drink.indexOf(object));
+            calcPreis();
+        }
+
+    }
 
     private List<Double> calcPreis () {
         if (preis.isEmpty()){
@@ -250,6 +273,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    public static MainActivity getInstance() {
+        return instance;
     }
 
 

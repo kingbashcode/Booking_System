@@ -43,6 +43,7 @@ public class Order {
     public void addfood(Food food){
         foodList.add(food);
     }
+    public void removeFood(int pos) {foodList.remove(pos);}
 
     public void setFoodList(List<Food> foodList) {
         this.foodList = foodList;
@@ -55,6 +56,7 @@ public class Order {
     public void adddrink(Drinks drink){
         drinkList.add(drink);
     }
+    public void removeDrink(int pos) {drinkList.remove(pos);}
 
     public void setDrinkList(List<Drinks> drinkList) {
         this.drinkList = drinkList;

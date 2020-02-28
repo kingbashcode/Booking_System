@@ -5,7 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
+import android.widget.ExpandableListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,6 +38,11 @@ public class OrderAdapter extends BaseExpandableListAdapter {
         Object orderObject = this.listDataChild.get(this.orderHeader.get(groupPosition)).get(childPosition);
         return orderObject.toString();
     }
+    public Object getChildObj(int groupPosition, int childPosition) {
+        Object orderObject = this.listDataChild.get(this.orderHeader.get(groupPosition)).remove(childPosition);
+        return orderObject;
+    }
+
 
 
     @Override
@@ -42,7 +51,7 @@ public class OrderAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+    public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         final String childText = (String) getChild(groupPosition, childPosition);
 
 
@@ -57,6 +66,20 @@ public class OrderAdapter extends BaseExpandableListAdapter {
 
 
         txtListChild.setText(childText);
+
+        Button button = (Button) convertView.findViewById(R.id.delete_item);
+
+
+        button.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                Object object = listDataChild.get(orderHeader.get(groupPosition)).get(childPosition);
+                listDataChild.get(orderHeader.get(groupPosition)).remove(childPosition);
+                MainActivity.getInstance().deletedItem(object);
+                OrderAdapter.this.notifyDataSetChanged();
+
+
+            }
+        });
 
         return convertView;
     }
@@ -86,8 +109,8 @@ public class OrderAdapter extends BaseExpandableListAdapter {
 
 
     @Override
-    public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        String headerTitle = (String) getGroup(groupPosition);
+    public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+        final String headerTitle = (String) getGroup(groupPosition);
         Double preis = 0.0;
         if (listPreis.size() > groupPosition){
             preis = listPreis.get(groupPosition);}
@@ -97,12 +120,20 @@ public class OrderAdapter extends BaseExpandableListAdapter {
             convertView = infalInflater.inflate(R.layout.list_group, null);
         }
 
-        TextView lblListHeader = convertView
-                .findViewById(R.id.listTitle);
+        TextView lblListHeader = convertView.findViewById(R.id.listTitle);
         TextView ListHpreis = convertView.findViewById(R.id.preis_p_order);
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
         ListHpreis.setText(preis.toString());
+
+        Button button = (Button) convertView.findViewById(R.id.complete);
+
+
+        button.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(mcontext, headerTitle + " ausgewählt",Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         return convertView;
