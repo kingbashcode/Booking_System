@@ -139,12 +139,12 @@ public class OrderAdapter extends BaseExpandableListAdapter {
                 alertDialog.setTitle("Bezahlen");
                 alertDialog.setMessage("Offener Betrag: " + finalPreis);
 
-                alertDialog.setButton("Abbrechen..", new DialogInterface.OnClickListener() {
+                alertDialog.setButton3("Abbrechen", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // here you can add functions
                     }
                 });
-                alertDialog.setButton("Abschliessen..", new DialogInterface.OnClickListener() {
+                alertDialog.setButton("Abschliessen", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // here you can add functions
                     }
