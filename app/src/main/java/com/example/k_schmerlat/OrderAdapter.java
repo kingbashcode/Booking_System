@@ -8,7 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -135,22 +137,31 @@ public class OrderAdapter extends BaseExpandableListAdapter {
         button.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
 
-                AlertDialog alertDialog = new AlertDialog.Builder(mcontext).create(); //Read Update
-                alertDialog.setTitle("Bezahlen");
-                alertDialog.setMessage("Offener Betrag: " + finalPreis);
+                // create an alert builder
+                AlertDialog.Builder builder = new AlertDialog.Builder(mcontext);
+                builder.setTitle("Bezahlung");
+                // set the custom layout
+                LayoutInflater inflater = (LayoutInflater) mcontext.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
 
-                alertDialog.setButton3("Abbrechen", new DialogInterface.OnClickListener() {
+                final View customLayout = inflater.inflate(R.layout.layout_dialog, null);
+
+                builder.setView(customLayout);
+                // add a button
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // here you can add functions
+                        // send data from the AlertDialog to the Activity
+                        EditText editText = customLayout.findViewById(R.id.offenerbetrag);
+                        sendDialogDataToActivity(editText.getText().toString());
                     }
                 });
-                alertDialog.setButton("Abschliessen", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // here you can add functions
-                    }
-                });
+                // create and show the alert dialog
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+            // do something with the data coming from the AlertDialog
+            private void sendDialogDataToActivity(String data) {
 
-                alertDialog.show();  //<-- See This!
             }
 
         });
