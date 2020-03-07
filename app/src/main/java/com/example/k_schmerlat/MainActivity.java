@@ -186,7 +186,11 @@ public class MainActivity extends AppCompatActivity {
         List<Object> items = new ArrayList<Object>();
         items.addAll(orderList.get(i).getFoodList());
         items.addAll(orderList.get(i).getDrinkList());
-        itemsmap.put(listDataHeader.get(i), items);
+        if(listDataHeader.isEmpty()){
+            listDataHeader.add("Bestellung " + (i));
+            itemsmap.put(listDataHeader.get(i), items);
+        }else {
+            itemsmap.put(listDataHeader.get(i), items);}
         return itemsmap;
 
     }
@@ -211,6 +215,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+    public void deletedOrder (int position) {
+
+        orderList.remove(position);
+        itemsmap.remove("Bestellung " + (position));
+        listDataHeader.remove("Bestellung " + (position));
+        i = position;
+
+    }
+
+
 
     private List<Double> calcPreis () {
         if (preis.isEmpty()){
