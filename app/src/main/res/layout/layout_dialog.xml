@@ -21,7 +21,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textView3"
             android:layout_width="77dp"
             android:layout_height="match_parent"
             android:layout_weight="0.4"
@@ -57,14 +57,45 @@
 
         <EditText
             android:id="@+id/bezahlung"
-            style="@android:style/Widget.Material.Light.AutoCompleteTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:ems="10"
-            android:gravity="center"
             android:hint="Geldbetrag bekommen"
-            android:inputType="number"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:inputType="numberDecimal" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#2196F3"
+        android:scaleType="fitXY"
+        app:srcCompat="?attr/actionModeBackground" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/rueckgeld_Bs"
+            android:layout_width="33dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:gravity="center"
+            android:text="Rueckgeld:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:id="@+id/rueckgeld"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:gravity="center"
+            android:text="TextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
     </LinearLayout>
 
 </LinearLayout>
