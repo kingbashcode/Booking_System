@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     ExpandableListView expListView;
     private int i = 0;
     private boolean m = false;
+    private int b = 1;
     List<String> listDataHeader = new ArrayList<String>();
     List<Double> preis = new ArrayList<Double>();
     private HashMap<String, List<Object>> itemsmap = new HashMap<>();
@@ -81,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
                 Order order = new Order();
                 orderList.add(order);
                 i = (orderList.size() -1);
-                //i++;
-                listDataHeader.add("Bestellung " + (i));
+                listDataHeader.add("Bestellung " + b);
+                b++;
                 showOrderListEntries ();
 
 
@@ -145,6 +146,9 @@ public class MainActivity extends AppCompatActivity {
                     order.countfood(order.getFoodList());
                 }
                 else {
+                    if (i == orderList.size()){
+                        i = orderList.size() - 1;
+                    }
                     Order order = orderList.get(i);
                     order.addfood(value);
                     order.countfood(order.getFoodList());
@@ -188,9 +192,8 @@ public class MainActivity extends AppCompatActivity {
         items.addAll(orderList.get(i).getDrinkList());
         if(listDataHeader.isEmpty()){
             listDataHeader.add("Bestellung " + (i));
-            itemsmap.put(listDataHeader.get(i), items);
-        }else {
             itemsmap.put(listDataHeader.get(i), items);}
+        else {itemsmap.put(listDataHeader.get(i), items);}
         return itemsmap;
 
     }
@@ -219,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
 
         orderList.remove(position);
         itemsmap.remove("Bestellung " + (position));
-        listDataHeader.remove("Bestellung " + (position));
+        preis.remove(position);
         i = position;
 
     }
