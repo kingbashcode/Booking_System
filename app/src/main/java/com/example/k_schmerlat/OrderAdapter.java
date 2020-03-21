@@ -2,6 +2,7 @@ package com.example.k_schmerlat;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -111,7 +112,7 @@ public class OrderAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        final String headerTitle = (String) getGroup(groupPosition);
+        String headerTitle = (String) getGroup(groupPosition);
         Double preis = 0.0;
         if (listPreis.size() > groupPosition){
             preis = listPreis.get(groupPosition);}
@@ -145,15 +146,19 @@ public class OrderAdapter extends BaseExpandableListAdapter {
 
                 // create an alert builder
                 AlertDialog.Builder builder = new AlertDialog.Builder(mcontext);
+                //builder.setTitle("Bezahlung");
+                //builder.setIcon(R.drawable.payment);
                 // set the custom layout
                 LayoutInflater inflater = (LayoutInflater) mcontext.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
 
                 final View customLayout = inflater.inflate(R.layout.layout_dialog, null);
 
                 builder.setView(customLayout);
-                TextView textView = customLayout.findViewById(R.id.offenerbetrag);
+
+                final TextView textView = customLayout.findViewById(R.id.offenerbetrag);
+                final TextView textView1 = customLayout.findViewById(R.id.rueckgeld);
                 textView.setText(finalPreis.toString());
-                EditText editText = customLayout.findViewById(R.id.bezahlung);
+                final EditText editText = customLayout.findViewById(R.id.bezahlung);
                 editText.setOnEditorActionListener(
                         new EditText.OnEditorActionListener() {
                             @Override
@@ -165,7 +170,9 @@ public class OrderAdapter extends BaseExpandableListAdapter {
                                                 event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
                                     if (event == null || !event.isShiftPressed()) {
                                         // the user is done typing.
-
+                                        double rueckgeld = Double.parseDouble(editText.getText().toString());
+                                        double finalrueckgeld = rueckgeld - finalPreis;
+                                        textView1.setText(Double.toString(finalrueckgeld));
                                         return true; // consume.
                                     }
                                 }
@@ -183,6 +190,8 @@ public class OrderAdapter extends BaseExpandableListAdapter {
 
 
 
+
+
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -193,7 +202,9 @@ public class OrderAdapter extends BaseExpandableListAdapter {
                 });
                 // create and show the alert dialog
                 AlertDialog dialog = builder.create();
+                dialog.getWindow().setBackgroundDrawableResource(android.R.color.background_light);
                 dialog.show();
+
             }
             // do something with the data coming from the AlertDialog
             private void sendDialogDataToActivity(String data) {

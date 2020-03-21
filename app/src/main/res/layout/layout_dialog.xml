@@ -1,101 +1,91 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#2196F3"
-        android:scaleType="fitXY"
-        app:srcCompat="?attr/actionModeBackground" />
+    >
 
-    <LinearLayout
+    <TableRow
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:background="#FFC107"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="188dp"
+            android:layout_height="80dp"
+            app:srcCompat="@drawable/payment" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="5dp">
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="77dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="0.4"
-            android:gravity="center"
-            android:text="Offener Betrag:"
+            android:gravity="left"
+            android:text="Total:"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
             android:id="@+id/offenerbetrag"
-            android:layout_width="wrap_content"
+            android:layout_width="279dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.6"
-            android:gravity="center"
-            android:text="TextView"
+            android:gravity="right"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-    </LinearLayout>
+    </TableRow>
 
-    <ImageView
-        android:id="@+id/imageView2"
+    <TableRow
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#2196F3"
-        android:scaleType="fitXY"
-        app:srcCompat="?attr/actionModeBackground" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/actionModeSplitBackground"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/bezahlung"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Geldbetrag bekommen"
-            android:inputType="numberDecimal" />
-
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#2196F3"
-        android:scaleType="fitXY"
-        app:srcCompat="?attr/actionModeBackground" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:paddingTop="5dp">
 
         <TextView
             android:id="@+id/rueckgeld_Bs"
-            android:layout_width="33dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.4"
-            android:gravity="center"
-            android:text="Rueckgeld:"
+            android:gravity="left"
+            android:text="Rückgeld : "
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
             android:id="@+id/rueckgeld"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.4"
-            android:gravity="center"
-            android:text="TextView"
+            android:gravity="right"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-    </LinearLayout>
 
-</LinearLayout>
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:paddingTop="25dp">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            <EditText
+                android:id="@+id/bezahlung"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Label"/>
+        </android.support.design.widget.TextInputLayout>
+
+    </TableRow>
+
+
+
+
+</TableLayout>
