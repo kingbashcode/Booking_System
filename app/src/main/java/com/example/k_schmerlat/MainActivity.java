@@ -17,6 +17,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     List<String> listDataHeader = new ArrayList<String>();
     List<Double> preis = new ArrayList<Double>();
     private HashMap<String, List<Object>> itemsmap = new HashMap<>();
+    DecimalFormat df = new DecimalFormat("#.#");
+
 
 
 
@@ -231,12 +234,12 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Double> calcPreis () {
         if (preis.isEmpty()){
-            preis.add(orderList.get(i).getPreis());
+            preis.add(Double.valueOf(df.format(orderList.get(i).getPreis())));
         }else if (preis.size() == (i + 1)) {
-            preis.set(i,orderList.get(i).getPreis());
+            preis.set(i,Double.valueOf(df.format(orderList.get(i).getPreis())));
         }else if (m == true && preis.size() != i) {
-            preis.set(i,orderList.get(i).getPreis());
-        }else{preis.add(orderList.get(i).getPreis());}
+            preis.set(i,Double.valueOf(df.format(orderList.get(i).getPreis())));
+        }else{preis.add(Double.valueOf(df.format(orderList.get(i).getPreis())));}
 
         return preis;
     }
