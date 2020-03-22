@@ -7,10 +7,11 @@
 
     <TextView
         android:id="@+id/listTitle"
+        style="@android:style/Widget.Material.TextView.SpinnerItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0.5"
-        android:background="#FF9800"
+        android:background="#B39DDB"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
@@ -19,10 +20,11 @@
 
     <TextView
         android:id="@+id/preis_p_order2"
+        style="@android:style/Widget.Material.TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0.3"
-        android:background="#FF9800"
+        android:background="#B39DDB"
         android:gravity="right"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
         android:paddingTop="10dp"
@@ -33,10 +35,11 @@
 
     <TextView
         android:id="@+id/preis_p_order"
+        style="@android:style/Widget.Material.TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0.2"
-        android:background="#FF9800"
+        android:background="#B39DDB"
         android:gravity="left"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
         android:paddingTop="10dp"
@@ -46,17 +49,23 @@
 
     <Button
         android:id="@+id/complete4"
+        style="@android:style/Widget.Material.Light.Button.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#03A9F4"
         android:focusable="false"
-        android:text="$" />
+        android:text="$"
+        android:theme="@style/Theme.MaterialComponents" />
 
     <Button
         android:id="@+id/complete"
+        style="@android:style/Widget.Material.Light.Button.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#03A9F4"
         android:focusable="false"
-        android:text="✔" />
+        android:text="✔"
+        android:theme="@style/Theme.MaterialComponents" />
 
 
 </LinearLayout>
