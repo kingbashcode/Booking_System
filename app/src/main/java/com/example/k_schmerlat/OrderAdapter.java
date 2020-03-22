@@ -17,6 +17,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,6 +29,8 @@ public class OrderAdapter extends BaseExpandableListAdapter {
     private List<String> orderHeader;
     private List<Double> listPreis;
     private HashMap<String, List<Object>> listDataChild;
+    DecimalFormat df = new DecimalFormat("#.#");
+
 
 
 
@@ -172,7 +175,8 @@ public class OrderAdapter extends BaseExpandableListAdapter {
                                         // the user is done typing.
                                         double rueckgeld = Double.parseDouble(editText.getText().toString());
                                         double finalrueckgeld = rueckgeld - finalPreis;
-                                        textView1.setText(Double.toString(finalrueckgeld));
+
+                                        textView1.setText(df.format(finalrueckgeld));
                                         return true; // consume.
                                     }
                                 }

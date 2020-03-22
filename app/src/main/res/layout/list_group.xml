@@ -52,7 +52,6 @@
         style="@android:style/Widget.Material.Light.Button.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#03A9F4"
         android:focusable="false"
         android:text="$"
         android:theme="@style/Theme.MaterialComponents" />
@@ -62,7 +61,6 @@
         style="@android:style/Widget.Material.Light.Button.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#03A9F4"
         android:focusable="false"
         android:text="✔"
         android:theme="@style/Theme.MaterialComponents" />
