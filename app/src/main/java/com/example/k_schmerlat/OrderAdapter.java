@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -41,6 +42,8 @@ public class OrderAdapter extends BaseExpandableListAdapter {
         this.listPreis = listPreis;
 
 
+
+
     }
 
     @Override
@@ -48,6 +51,7 @@ public class OrderAdapter extends BaseExpandableListAdapter {
         Object orderObject = this.listDataChild.get(this.orderHeader.get(groupPosition)).get(childPosition);
         return orderObject.toString();
     }
+
 
 
     @Override
@@ -130,8 +134,10 @@ public class OrderAdapter extends BaseExpandableListAdapter {
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
         ListHpreis.setText(preis.toString());
-
-        Button button = (Button) convertView.findViewById(R.id.complete4);
+        final Button button = (Button) convertView.findViewById(R.id.complete4);
+        if(MainActivity.getInstance().paycheck(groupPosition) == true){
+            button.setBackgroundColor(Color.GREEN);
+        };
         Button buttonDelete = (Button) convertView.findViewById(R.id.complete);
         buttonDelete.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
@@ -189,6 +195,8 @@ public class OrderAdapter extends BaseExpandableListAdapter {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // send data from the AlertDialog to the Activity
+                        MainActivity.getInstance().payed(groupPosition);
+                        button.setBackgroundColor(Color.GREEN);
 
 
 

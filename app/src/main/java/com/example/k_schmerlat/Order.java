@@ -10,10 +10,9 @@ public class Order {
     private long id;
     private List<Food> foodList;
     private List<Drinks> drinkList;
-    double Preis;
-    Map<Food, Long> resultMapfood = new HashMap<>();
-    Map<Drinks, Long> resultMapdrink = new HashMap<>();
-    HashMap items = new HashMap<>();
+    private double Preis;
+    private boolean payed = false;
+
 
 
 
@@ -70,36 +69,13 @@ public class Order {
         Preis = preis;
     }
 
-    public void countfood(List<Food> inputList) {
-        for (Food element : inputList) {
-            if (resultMapfood.containsKey(element)) {
-                resultMapfood.put(element, resultMapfood.get(element) + 1L);
-            } else {
-                resultMapfood.put(element, 1L);
-            }
-        }
-
+    public boolean isPayed() {
+        return payed;
     }
 
-    public void countdrinks(List<Drinks> inputList) {
-        for (Drinks element : inputList) {
-            if (resultMapdrink.containsKey(element)) {
-                resultMapdrink.put(element, resultMapdrink.get(element) + 1L);
-            } else {
-                resultMapdrink.put(element, 1L);
-            }
-        }
-
+    public void setPayed(boolean payed) {
+        this.payed = payed;
     }
-
-    public HashMap getitems(){
-
-        items.putAll(resultMapdrink);
-        items.putAll(resultMapfood);
-
-        return items;
-
-    };
 
 
 }

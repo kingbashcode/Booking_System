@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     List<Double> preis = new ArrayList<Double>();
     private HashMap<String, List<Object>> itemsmap = new HashMap<>();
     DecimalFormat df = new DecimalFormat("#.#");
+    private List<Boolean> bezahlt = new ArrayList<>();
 
 
 
@@ -113,12 +114,11 @@ public class MainActivity extends AppCompatActivity {
                     orderList.add(order);
                     order.adddrink(value);
                     order.setPreis(value.getPreis());
-                    order.countdrinks(order.getDrinkList());
+
                 }
                 else{
                     Order order = orderList.get(i);
                     order.adddrink(value);
-                    order.countdrinks(order.getDrinkList());
                     double price = order.getPreis() + value.getPreis();
                     order.setPreis(price);
                 }
@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
                     orderList.add(order);
                     order.addfood(value);
                     order.setPreis(value.getPreis());
-                    order.countfood(order.getFoodList());
+
                 }
                 else {
                     if (i == orderList.size()){
@@ -154,7 +154,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                     Order order = orderList.get(i);
                     order.addfood(value);
-                    order.countfood(order.getFoodList());
                     double price = order.getPreis() + value.getPreis();
                     order.setPreis(price);
                 }
@@ -242,6 +241,14 @@ public class MainActivity extends AppCompatActivity {
         }else{preis.add(Double.valueOf(df.format(orderList.get(i).getPreis())));}
 
         return preis;
+    }
+
+    public void payed(int position){
+        orderList.get(position).setPayed(true);
+    };
+
+    public boolean paycheck(int position){
+        return orderList.get(position).isPayed();
     }
 
     private void filldatabase() {
