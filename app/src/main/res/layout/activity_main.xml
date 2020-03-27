@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:focusableInTouchMode="true"
             android:orientation="horizontal"
-           >
+            >
 
 
             <TextView
@@ -73,7 +73,10 @@
                 android:clickable="true"
                 android:divider="#FF673AB7"
                 android:dividerHeight="2dp"
-                android:scrollbarThumbHorizontal="@drawable/scrollbar_vertical_thumb"
+                android:scrollbarAlwaysDrawHorizontalTrack="true"
+                android:scrollbarAlwaysDrawVerticalTrack="true"
+                android:scrollbarSize="8dp"
+                android:scrollbarStyle="outsideOverlay"
                 android:scrollbarThumbVertical="@drawable/scrollbar_vertical_thumb"
                 android:scrollbarTrackVertical="@drawable/scrollbar_vertical_track" />
 
@@ -91,6 +94,10 @@
                 android:clickable="true"
                 android:divider="#FF673AB7"
                 android:dividerHeight="2dp"
+                android:scrollbarAlwaysDrawHorizontalTrack="true"
+                android:scrollbarAlwaysDrawVerticalTrack="true"
+                android:scrollbarSize="8dp"
+                android:scrollbarStyle="outsideOverlay"
                 android:scrollbarThumbHorizontal="@drawable/scrollbar_vertical_thumb"
                 android:scrollbarThumbVertical="@drawable/scrollbar_vertical_thumb" />
         </LinearLayout>
@@ -110,7 +117,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/back_3"
+            android:background="@drawable/back_4"
             android:focusableInTouchMode="true"
             android:gravity="center"
             android:orientation="horizontal">
@@ -131,7 +138,8 @@
             android:layout_height="match_parent"
             android:focusableInTouchMode="true"
             android:orientation="horizontal"
-            android:paddingLeft="15dp">
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp">
 
             <ExpandableListView
 
@@ -139,7 +147,8 @@
                 style="@android:style/Widget.Material.ExpandableListView"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:divider="@android:color/darker_gray"
+                android:divider="#FFFFFF"
+                android:dividerHeight="2dp"
                 android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"></ExpandableListView>
         </LinearLayout>
 

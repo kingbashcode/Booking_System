@@ -79,7 +79,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:background="@drawable/back"
-            android:gravity="left"
+            android:gravity="left|center_vertical"
             android:padding="10dp"
             android:text="Bekommen:"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
