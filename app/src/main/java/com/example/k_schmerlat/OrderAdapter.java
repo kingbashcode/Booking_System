@@ -164,7 +164,7 @@ public class OrderAdapter extends BaseExpandableListAdapter {
                         }
                     };
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(mcontext);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mcontext, R.style.AlertDialogTheme);
                     builder.setIcon(R.drawable.baseline_pan_tool_black_18dp);
                     builder.setTitle("HALT, STOPP");
                     builder.setMessage("Sicher? Rechnung wurde noch nicht bezahlt?").setPositiveButton("Ja, Bestellung abschliessen", dialogClickListener)
@@ -185,9 +185,7 @@ public class OrderAdapter extends BaseExpandableListAdapter {
             public void onClick(View v) {
 
                 // create an alert builder
-                AlertDialog.Builder builder = new AlertDialog.Builder(mcontext);
-                builder.setTitle("Bezahlung");
-                //builder.setIcon(R.drawable.payment);
+                AlertDialog.Builder builder = new AlertDialog.Builder(mcontext, R.style.AlertDialogTheme);
                 // set the custom layout
                 LayoutInflater inflater = (LayoutInflater) mcontext.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
 
@@ -197,7 +195,7 @@ public class OrderAdapter extends BaseExpandableListAdapter {
 
                 final TextView textView = customLayout.findViewById(R.id.offenerbetrag);
                 final TextView textView1 = customLayout.findViewById(R.id.rueckgeld);
-                textView.setText(finalPreis.toString());
+                textView.setText(finalPreis.toString() + " CHF");
                 final EditText editText = customLayout.findViewById(R.id.bezahlung);
                 editText.setOnEditorActionListener(
                         new EditText.OnEditorActionListener() {
@@ -213,7 +211,7 @@ public class OrderAdapter extends BaseExpandableListAdapter {
                                         double rueckgeld = Double.parseDouble(editText.getText().toString());
                                         double finalrueckgeld = rueckgeld - finalPreis;
 
-                                        textView1.setText(df.format(finalrueckgeld));
+                                        textView1.setText(df.format(finalrueckgeld) + " CHF");
                                         return true; // consume.
                                     }
                                 }

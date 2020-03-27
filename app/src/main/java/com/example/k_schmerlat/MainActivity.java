@@ -53,9 +53,9 @@ public class MainActivity extends AppCompatActivity {
         dataSource = new DataSource(this);
         filldatabase();
         listDataHeader.add("Bestellung " + (i));
-
-
-
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.logo);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
 
     }
     protected void onResume() {
@@ -97,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void showdrinksListEntries () {
         List<Drinks> drinksList = dataSource.getAllDrinks();
-
 
         ArrayAdapter<Drinks> drinksArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_selectable_list_item, drinksList);
 

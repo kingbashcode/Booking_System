@@ -1,17 +1,37 @@
 <resources>
 
-    <style name="AppTheme.MyTheme"    parent="Theme.MaterialComponents.Light.DarkActionBar.Bridge">
+    <style name="AppTheme.MyTheme"    parent="Theme.MaterialComponents.Light.Bridge">
         <!-- Customize your theme here. -->
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+        <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
+        <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
     </style>
 
     <style name="inputtest" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="boxStrokeColor">#7E57C2</item>
-        <item name="boxStrokeWidth">2dp</item>
+        <item name="boxStrokeWidth">4dp</item>
+    </style>
+
+    <style name="AlertDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+
+        <item name="android:buttonStyle">@style/RobotoButtonStyleAlert</item>
     </style>
 
 
+    <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/allerta_stencil</item>
+    </style>
+
+    <style name="RobotoButtonStyle" parent="@style/Widget.MaterialComponents.Button">
+        <item name="android:fontFamily">@font/allerta_stencil</item>
+        <item name="android:textColor">#111</item>
+    </style>
+
+    <style name="RobotoButtonStyleAlert" parent="@style/Widget.MaterialComponents.Button">
+        <item name="android:fontFamily">@font/allerta_stencil</item>
+        <item name="android:textColor">#7E57C2</item>
+        <item name="android:textSize">15dp</item>
+
+    </style>
 
 
 </resources>

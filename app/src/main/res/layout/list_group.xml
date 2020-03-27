@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.5"
         android:background="#B39DDB"
+        android:fontFamily="@font/allerta_stencil"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
@@ -25,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.3"
         android:background="#B39DDB"
+        android:fontFamily="@font/allerta_stencil"
         android:gravity="right"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
         android:paddingTop="10dp"
@@ -40,6 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.2"
         android:background="#B39DDB"
+        android:fontFamily="@font/allerta_stencil"
         android:gravity="left"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
         android:paddingTop="10dp"
@@ -53,6 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:focusable="false"
+        android:fontFamily="@font/allerta_stencil"
         android:text="$"
         android:theme="@style/Theme.MaterialComponents" />
 
@@ -62,6 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:focusable="false"
+        android:fontFamily="@font/allerta_stencil"
         android:text="✔"
         android:theme="@style/Theme.MaterialComponents" />
 
