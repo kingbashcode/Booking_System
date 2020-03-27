@@ -134,17 +134,48 @@ public class OrderAdapter extends BaseExpandableListAdapter {
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
         ListHpreis.setText(preis.toString());
-        final Button button = (Button) convertView.findViewById(R.id.complete4);
-        if(MainActivity.getInstance().paycheck(groupPosition) == true){
-            button.setBackgroundColor(Color.GREEN);
-        };
+        Button button = (Button) convertView.findViewById(R.id.complete4);
         Button buttonDelete = (Button) convertView.findViewById(R.id.complete);
+        if(MainActivity.getInstance().paycheck(groupPosition) == true){
+            button.setTextColor(Color.GREEN);
+            buttonDelete.setTextColor(Color.GREEN);
+        }else{
+            button.setTextColor(Color.WHITE);
+            buttonDelete.setTextColor(Color.WHITE);
+        }
         buttonDelete.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
+                if(MainActivity.getInstance().paycheck(groupPosition) == false){
+                    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which){
+                                case DialogInterface.BUTTON_POSITIVE:
+                                    orderHeader.remove(groupPosition);
+                                    MainActivity.getInstance().deletedOrder(groupPosition);
+
+                                    OrderAdapter.this.notifyDataSetChanged();
+                                    break;
+
+                                case DialogInterface.BUTTON_NEGATIVE:
+                                    //No button clicked
+                                    break;
+                            }
+                        }
+                    };
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mcontext);
+                    builder.setIcon(R.drawable.baseline_pan_tool_black_18dp);
+                    builder.setTitle("HALT, STOPP");
+                    builder.setMessage("Sicher? Rechnung wurde noch nicht bezahlt?").setPositiveButton("Ja, Bestellung abschliessen", dialogClickListener)
+                            .setNegativeButton("Nein, nicht abschliessen", dialogClickListener).show();
+
+                }
+                else{
                 orderHeader.remove(groupPosition);
                 MainActivity.getInstance().deletedOrder(groupPosition);
 
-                OrderAdapter.this.notifyDataSetChanged();
+                OrderAdapter.this.notifyDataSetChanged();}
             }
         });
 
@@ -155,7 +186,7 @@ public class OrderAdapter extends BaseExpandableListAdapter {
 
                 // create an alert builder
                 AlertDialog.Builder builder = new AlertDialog.Builder(mcontext);
-                //builder.setTitle("Bezahlung");
+                builder.setTitle("Bezahlung");
                 //builder.setIcon(R.drawable.payment);
                 // set the custom layout
                 LayoutInflater inflater = (LayoutInflater) mcontext.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
@@ -196,7 +227,8 @@ public class OrderAdapter extends BaseExpandableListAdapter {
                     public void onClick(DialogInterface dialog, int which) {
                         // send data from the AlertDialog to the Activity
                         MainActivity.getInstance().payed(groupPosition);
-                        button.setBackgroundColor(Color.GREEN);
+                        OrderAdapter.this.notifyDataSetChanged();
+                        //button.setBackgroundColor(Color.GREEN);
 
 
 
