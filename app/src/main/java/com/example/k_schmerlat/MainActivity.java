@@ -207,14 +207,12 @@ public class MainActivity extends AppCompatActivity {
         List<Food> food = order.getFoodList();
         List<Drinks> drink = order.getDrinkList();
         if (food.contains(object)){
-            preis.remove(food.get(food.indexOf(object)).getPreis());
             Double newPreis = order.getPreis() - food.get(food.indexOf(object)).getPreis();
             order.setPreis(newPreis);
             order.removeFood(food.indexOf(object));
             calcPreis();
 
         }else if (drink.contains(object)){
-            preis.remove(drink.get(drink.indexOf(object)).getPreis());
             Double newPreis = order.getPreis() - drink.get(drink.indexOf(object)).getPreis();
             order.setPreis(newPreis);
             order.removeDrink(drink.indexOf(object));

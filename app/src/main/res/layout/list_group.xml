@@ -56,7 +56,6 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:focusable="false"
-        android:fontFamily="@font/allerta_stencil"
         android:text="$"
         android:theme="@style/Theme.MaterialComponents" />
 
@@ -66,7 +65,6 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:focusable="false"
-        android:fontFamily="@font/allerta_stencil"
         android:text="✔"
         android:theme="@style/Theme.MaterialComponents" />
 

@@ -12,13 +12,8 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ExpandableListAdapter;
-import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -195,7 +190,7 @@ public class OrderAdapter extends BaseExpandableListAdapter {
 
                 final TextView textView = customLayout.findViewById(R.id.offenerbetrag);
                 final TextView textView1 = customLayout.findViewById(R.id.rueckgeld);
-                textView.setText(finalPreis.toString() + " CHF");
+                textView.setText(finalPreis.toString() + "0 CHF");
                 final EditText editText = customLayout.findViewById(R.id.bezahlung);
                 editText.setOnEditorActionListener(
                         new EditText.OnEditorActionListener() {
