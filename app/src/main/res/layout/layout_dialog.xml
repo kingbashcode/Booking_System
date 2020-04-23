@@ -86,21 +86,19 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/bezahlung12"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            style="@style/input"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:gravity="right"
-            android:theme="@style/inputtest"
+            android:theme="@style/input"
             app:boxStrokeColor="#7E57C2"
-            app:hintTextColor="#00000000"
             app:startIconDrawable="@drawable/account_balance_wallet">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/bezahlung"
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
-                android:gravity="center"
                 android:hint="Betrag hier Eingeben"
                 android:inputType="numberDecimal"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />

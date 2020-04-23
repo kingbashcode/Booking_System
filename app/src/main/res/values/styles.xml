@@ -6,10 +6,12 @@
         <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
     </style>
 
-    <style name="inputtest" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+    <style name="input" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="boxStrokeColor">#7E57C2</item>
-        <item name="boxStrokeWidth">4dp</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="hintTextColor">#7E57C2</item>
     </style>
+
 
     <style name="AlertDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
 
