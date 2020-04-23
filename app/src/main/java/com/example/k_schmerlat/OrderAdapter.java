@@ -78,7 +78,7 @@ public class OrderAdapter extends BaseExpandableListAdapter {
             public void onClick(View v) {
                 Object object = listDataChild.get(orderHeader.get(groupPosition)).get(childPosition);
                 listDataChild.get(orderHeader.get(groupPosition)).remove(childPosition);
-                MainActivity.getInstance().deletedItem(object);
+                MainActivity.getInstance().deletedItem(object, groupPosition);
                 OrderAdapter.this.notifyDataSetChanged();
 
 

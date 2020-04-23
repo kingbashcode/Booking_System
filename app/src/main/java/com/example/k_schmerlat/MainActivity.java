@@ -202,7 +202,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void deletedItem (Object object) {
+    public void deletedItem (Object object, int position) {
+        i = position;
         Order order = orderList.get(i);
         List<Food> food = order.getFoodList();
         List<Drinks> drink = order.getDrinkList();
