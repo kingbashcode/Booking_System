@@ -267,7 +267,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void readdata()  {
-        InputStream isfood = getResources().openRawResource(R.raw.foodraw1);
+        InputStream isfood = getResources().openRawResource(R.raw.foodraw);
         BufferedReader foodreader;
         foodreader = new BufferedReader(new InputStreamReader(isfood));
 
@@ -283,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
             Log.wtf("ERROR READING DATA", e);
             e.printStackTrace();
         }
-        InputStream isdrink = getResources().openRawResource(R.raw.drinkraw1);
+        InputStream isdrink = getResources().openRawResource(R.raw.drinkraw);
         BufferedReader drinkreader;
         drinkreader = new BufferedReader(new InputStreamReader(isdrink));
 
